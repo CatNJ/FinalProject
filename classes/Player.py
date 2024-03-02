@@ -1,14 +1,8 @@
 from pygame import *
 from classes.GameSprite import GameSprite
 
-class Player(GameSprite):
-    def __init__(self, window, x, y, width, height, color):
-        super().__init__(window, x, y, width, height, color)
-        self.width = width
-        self.height = height
-        self.color = color
-        self.rect = Rect(x, y, width, height)
 
+class Player(GameSprite):
     def update(self):
         keys_pressed = key.get_pressed()
         if keys_pressed[K_a]:

@@ -17,7 +17,9 @@ class Game():
         self.clock = time.Clock()
         self.run = True
 
-        self.player = Player(self.window, WIN_WIDTH/2, WIN_HEIGHT/2, 10, 10, (0, 100, 0))
+        self.player = Player(self.window, "sprites/player/player_pistol.png",
+                             WIN_WIDTH/2, WIN_HEIGHT/2,
+                             75, 75)
 
     def loop(self):
         self.player.update()

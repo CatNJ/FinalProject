@@ -3,7 +3,7 @@ from classes.GameSprite import GameSprite
 
 
 class Player(GameSprite):
-    def update(self):
+    def move(self):
         keys_pressed = key.get_pressed()
         if keys_pressed[K_a]:
             self.rect.x -= 5

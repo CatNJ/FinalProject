@@ -22,8 +22,9 @@ class Game():
                              75, 75)
 
     def loop(self):
-        self.player.update()
+        self.player.move()
         self.player.draw()
+        self.player.rotate(mouse.get_pos())
 
     def start(self):
         while self.run:

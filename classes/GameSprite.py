@@ -1,6 +1,8 @@
-from pygame import *
+import math
+from pygame import sprite
 from pygame.transform import *
 from pygame.image import load
+from pygame import math as pmath
 
 
 class GameSprite(sprite.Sprite):
@@ -9,12 +11,19 @@ class GameSprite(sprite.Sprite):
         self.window = window
 
         self.image = scale(load(image).convert_alpha(), (width, height))
+        self.base_image = self.image
         self.width = width
         self.height = height
 
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.hitbox_rect = self.base_image.get_rect(center = pmath.Vector2(x, y))
+        self.rect = self.hitbox_rect.copy()
+
+    def rotate(self, pos):
+        self.x_change_pos_sprite = (pos[0] - self.rect.centerx)
+        self.y_change_pos_sprite = (pos[1] - self.rect.centery)
+        self.angle = math.degrees(math.atan2(self.y_change_pos_sprite, self.x_change_pos_sprite))
+        self.image = rotate(self.base_image, -self.angle)
+
     
     def draw(self):
         self.window.blit(self.image, (self.rect.x, self.rect.y))

@@ -19,12 +19,13 @@ class Game():
 
         self.player = Player(self.window, "sprites/player/player_pistol.png",
                              WIN_WIDTH/2, WIN_HEIGHT/2,
-                             75, 75)
+                             28*2, 21*2)
 
     def loop(self):
         self.player.move()
         self.player.draw()
         self.player.rotate(mouse.get_pos())
+        self.player.shoot()
 
     def start(self):
         while self.run:

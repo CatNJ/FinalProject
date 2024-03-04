@@ -3,6 +3,11 @@ from classes.GameSprite import GameSprite
 import math
 
 class Player(GameSprite):
+    def __init__(self, window, image, x, y, width, height):
+        super().__init__(window, image, x, y, width, height)
+        self.bullets = []
+        self.bullet_delay = 0.3
+
     def move(self):
         key_pressed = key.get_pressed()
         if key_pressed[K_a]:
@@ -13,6 +18,14 @@ class Player(GameSprite):
             self.rect.y -= 5
         elif key_pressed[K_s]:
             self.rect.y += 5
+
+    def shoot(self):
+        if mouse.get_pressed()[0]:
+            mouse_x, mouse_y = mouse.get_pos()
+            self.bullets.append(PlayerBullet(self.window, self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2), mouse_x, mouse_y))
+
+        for bullet in self.bullets:
+            bullet.shoot()
 
 
 class PlayerBullet:

@@ -1,4 +1,6 @@
 from pygame import *
+from pygame.transform import *
+from pygame.image import load
 from random import randint
 from classes.Player import Player
 
@@ -17,6 +19,7 @@ class Game():
         self.clock = time.Clock()
         self.run = True
 
+        self.bg = scale(load("sprites/grass.png").convert(), (WIN_WIDTH, WIN_HEIGHT))
         self.player = Player(self.window, "sprites/player/player_pistol.png",
                              WIN_WIDTH/2, WIN_HEIGHT/2,
                              28*2, 21*2)
@@ -29,7 +32,7 @@ class Game():
 
     def start(self):
         while self.run:
-            self.window.fill((0, 0, 0))
+            self.window.blit(self.bg, (0, 0))
 
             for e in event.get():
                 if e.type == QUIT:

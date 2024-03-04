@@ -2,7 +2,7 @@ from pygame import *
 from random import randint
 from classes.Player import Player
 
-WIN_WIDTH, WIN_HEIGHT = 900, 600
+WIN_WIDTH, WIN_HEIGHT = 900, 900
 FPS = 60
 
 class Game():

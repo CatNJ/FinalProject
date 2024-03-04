@@ -7,7 +7,8 @@ class Player(GameSprite):
     def __init__(self, window, image, x, y, width, height):
         super().__init__(window, image, x, y, width, height)
         self.bullets = []
-        self.bullet_delay = 0.3
+        self.bullet_delay = 300
+        self.last_shoot = time.get_ticks()
 
     def move(self):
         key_pressed = key.get_pressed()
@@ -21,13 +22,15 @@ class Player(GameSprite):
             self.rect.y += 5
 
     def shoot(self):
-        if mouse.get_pressed()[0]:
+        current_time = time.get_ticks()
+        if mouse.get_pressed()[0] and current_time - self.last_shoot > self.bullet_delay:
             mouse_x, mouse_y = mouse.get_pos()
             self.bullets.append(PlayerBullet(self.window, self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2), mouse_x, mouse_y))
+            self.last_shoot = current_time
 
         for bullet in self.bullets:
             bullet.shoot()
-
+                
 
 class PlayerBullet:
     def __init__(self, window, x, y, mouse_x, mouse_y, damage=50):

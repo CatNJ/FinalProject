@@ -1,5 +1,6 @@
 from pygame import *
 from classes.GameSprite import GameSprite
+from random import randint
 import math
 
 class Player(GameSprite):
@@ -35,7 +36,7 @@ class PlayerBullet:
         self.y = y
         self.mouse_x = mouse_x
         self.mouse_y = mouse_y
-        self.speed = 30
+        self.speed = randint(30, 35)
         self.angle = math.atan2(y-mouse_y, x-mouse_x)
         self.x_vel = math.cos(self.angle) * self.speed
         self.y_vel = math.sin(self.angle) * self.speed

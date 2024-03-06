@@ -25,7 +25,10 @@ class Player(GameSprite):
         current_time = time.get_ticks()
         if mouse.get_pressed()[0] and current_time - self.last_shoot > self.bullet_delay:
             mouse_x, mouse_y = mouse.get_pos()
-            self.bullets.add(PlayerBullet(self.window, self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2), mouse_x, mouse_y))
+            self.bullets.add(PlayerBullet(self.window, "sprites/bullet.png", 
+                                          self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2),
+                                          8, 8,
+                                          mouse_x, mouse_y,))
             self.last_shoot = current_time
 
         self.bullets.update()
@@ -36,11 +39,9 @@ class Player(GameSprite):
         self.rotate(mouse.get_pos())
         self.shoot()
 
-class PlayerBullet:
-    def __init__(self, window, x, y, mouse_x, mouse_y, damage=50):
-        self.window = window
-        self.x = x
-        self.y = y
+class PlayerBullet(GameSprite):
+    def __init__(self, window, image, x, y, width, height, mouse_x, mouse_y, damage=50):
+        super().__init__(window, image, x, y, width, height)
         self.mouse_x = mouse_x
         self.mouse_y = mouse_y
         self.speed = randint(30, 35)
@@ -51,7 +52,6 @@ class PlayerBullet:
         self.damage = damage
 
     def update(self):
-        self.x -= int(self.x_vel)
-        self.y -= int(self.y_vel)
-
-        draw.circle(self.window, (255,255,0), (self.x, self.y), 5)
+        self.rect.x -= int(self.x_vel)
+        self.rect.y -= int(self.y_vel)
+        self.draw()

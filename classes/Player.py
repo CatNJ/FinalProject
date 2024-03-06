@@ -6,7 +6,7 @@ import math
 class Player(GameSprite):
     def __init__(self, window, image, x, y, width, height):
         super().__init__(window, image, x, y, width, height)
-        self.bullets = []
+        self.bullets = sprite.Group()
         self.bullet_delay = 300
         self.last_shoot = time.get_ticks()
 
@@ -25,11 +25,10 @@ class Player(GameSprite):
         current_time = time.get_ticks()
         if mouse.get_pressed()[0] and current_time - self.last_shoot > self.bullet_delay:
             mouse_x, mouse_y = mouse.get_pos()
-            self.bullets.append(PlayerBullet(self.window, self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2), mouse_x, mouse_y))
+            self.bullets.add(PlayerBullet(self.window, self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2), mouse_x, mouse_y))
             self.last_shoot = current_time
 
-        for bullet in self.bullets:
-            bullet.shoot()
+        self.bullets.update()
                 
     def update(self):
         self.move()
@@ -51,7 +50,7 @@ class PlayerBullet:
 
         self.damage = damage
 
-    def shoot(self):
+    def update(self):
         self.x -= int(self.x_vel)
         self.y -= int(self.y_vel)
 

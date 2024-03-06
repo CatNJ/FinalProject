@@ -31,6 +31,11 @@ class Player(GameSprite):
         for bullet in self.bullets:
             bullet.shoot()
                 
+    def update(self):
+        self.move()
+        self.draw()
+        self.rotate(mouse.get_pos())
+        self.shoot()
 
 class PlayerBullet:
     def __init__(self, window, x, y, mouse_x, mouse_y, damage=50):

@@ -1,3 +1,4 @@
+from random import randint
 from pygame import *
 from pygame.transform import *
 from pygame.image import load
@@ -27,10 +28,15 @@ class Game():
         self.player = Player(self.window, "sprites/player/player_pistol.png",
                              WIN_WIDTH/2, WIN_HEIGHT/2,
                              28*2.5, 21*2.5)
-        self.zombie = Enemy(self.window, "sprites/zombie/zombie_default.png",
-                             0, 0,
-                             28*2.5, 21*2.5,
-                             self.player)
+
+        self.zombies = sprite.Group()
+        
+        for _ in range(10):
+            self.zombie = Enemy(self.window, "sprites/zombie/zombie_default.png",
+                                 randint(0, WIN_WIDTH), randint(0, WIN_HEIGHT),
+                                 28*2.5, 21*2.5,
+                                 self.player)
+            self.zombies.add(self.zombie)
         
         
     def draw_cursor(self):
@@ -39,13 +45,9 @@ class Game():
         self.window.blit(self.cursor_image, (mouse_x-(image_width/2), mouse_y-(image_height/2)))
 
     def loop(self):
-        self.player.move()
-        self.player.draw()
-        self.player.rotate(mouse.get_pos())
-        self.player.shoot()
+        self.player.update()
 
-        self.zombie.move()
-        self.zombie.draw()
+        self.zombies.update()
 
         self.draw_cursor()
 

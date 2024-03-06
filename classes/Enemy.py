@@ -20,3 +20,7 @@ class Enemy(GameSprite):
         except ZeroDivisionError:
             pass
 
+    def update(self):
+        self.move()
+        self.draw()
+

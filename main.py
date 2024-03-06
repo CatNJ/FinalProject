@@ -3,6 +3,7 @@ from pygame.transform import *
 from pygame.image import load
 from random import randint
 from classes.Player import Player
+from classes.Enemy import Enemy
 
 WIN_WIDTH, WIN_HEIGHT = 900, 900
 FPS = 60
@@ -26,6 +27,10 @@ class Game():
         self.player = Player(self.window, "sprites/player/player_pistol.png",
                              WIN_WIDTH/2, WIN_HEIGHT/2,
                              28*2.5, 21*2.5)
+        self.zombie = Enemy(self.window, "sprites/zombie/zombie_default.png",
+                             0, 0,
+                             28*2.5, 21*2.5,
+                             self.player)
         
         
     def draw_cursor(self):
@@ -38,6 +43,9 @@ class Game():
         self.player.draw()
         self.player.rotate(mouse.get_pos())
         self.player.shoot()
+
+        self.zombie.move()
+        self.zombie.draw()
 
         self.draw_cursor()
 

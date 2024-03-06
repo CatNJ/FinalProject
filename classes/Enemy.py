@@ -7,6 +7,7 @@ class Enemy(GameSprite):
         super().__init__(window, image, x, y, width, height)
         self.target = target
         self.speed = 2
+        self.health = 100
 
     def move(self):
         try:

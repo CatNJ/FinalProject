@@ -18,12 +18,14 @@ class GameSprite(sprite.Sprite):
         self.hitbox_rect = self.base_image.get_rect(center = pmath.Vector2(x, y))
         self.rect = self.hitbox_rect.copy()
 
+    def get_pos(self):
+        return (self.rect.x, self.rect.y)
+
     def rotate(self, pos):
         self.x_change_pos_sprite = (pos[0] - self.rect.centerx)
         self.y_change_pos_sprite = (pos[1] - self.rect.centery)
         self.angle = math.degrees(math.atan2(self.y_change_pos_sprite, self.x_change_pos_sprite))
         self.image = rotate(self.base_image, -self.angle)
-
     
     def draw(self):
         self.window.blit(self.image, (self.rect.x, self.rect.y))

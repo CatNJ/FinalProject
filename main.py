@@ -46,7 +46,7 @@ class Game():
 
     def loop(self):
         self.player.update()
-
+        self.player.bullet_collide(self.zombies)
         self.zombies.update()
 
         self.draw_cursor()

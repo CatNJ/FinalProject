@@ -27,11 +27,18 @@ class Player(GameSprite):
             mouse_x, mouse_y = mouse.get_pos()
             self.bullets.add(PlayerBullet(self.window, "sprites/bullet.png", 
                                           self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2),
-                                          8, 8,
+                                          10, 10,
                                           mouse_x, mouse_y,))
             self.last_shoot = current_time
 
         self.bullets.update()
+
+    def bullet_collide(self, enemys):
+        collides = sprite.groupcollide(enemys, self.bullets, False, True)
+        for collide in collides:
+            collide.health -= 50
+            if collide.health <= 0:
+                collide.kill()
                 
     def update(self):
         self.move()
@@ -40,7 +47,7 @@ class Player(GameSprite):
         self.shoot()
 
 class PlayerBullet(GameSprite):
-    def __init__(self, window, image, x, y, width, height, mouse_x, mouse_y, damage=50):
+    def __init__(self, window, image, x, y, width, height, mouse_x, mouse_y):
         super().__init__(window, image, x, y, width, height)
         self.mouse_x = mouse_x
         self.mouse_y = mouse_y
@@ -48,8 +55,6 @@ class PlayerBullet(GameSprite):
         self.angle = math.atan2(y-mouse_y, x-mouse_x)
         self.x_vel = math.cos(self.angle) * self.speed
         self.y_vel = math.sin(self.angle) * self.speed
-
-        self.damage = damage
 
     def update(self):
         self.rect.x -= int(self.x_vel)

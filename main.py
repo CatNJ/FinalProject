@@ -24,7 +24,7 @@ class Game():
         self.clock = time.Clock()
         self.run = True
 
-        self.bg = GameSprite(self.window, "sprite/grass.png", 0, 0, WIN_WIDTH, WIN_HEIGHT)
+        self.bg = GameSprite(self.window, "sprites/grass.png", 0, 0, WIN_WIDTH*2, WIN_HEIGHT*2)
         self.cursor_image = scale(load("sprites/cursor.png"), (64, 64))
         self.player = Player(self.window, "sprites/player/player_pistol.png",
                              WIN_WIDTH/2, WIN_HEIGHT/2,
@@ -54,7 +54,7 @@ class Game():
 
     def start(self):
         while self.run:
-            self.window.blit(self.bg, (0, 0))
+            self.bg.draw()
 
             for e in event.get():
                 if e.type == QUIT:

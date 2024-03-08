@@ -3,6 +3,7 @@ from pygame import *
 from pygame.transform import *
 from pygame.image import load
 from random import randint
+from classes.GameSprite import GameSprite
 from classes.Player import Player
 from classes.Enemy import Enemy
 
@@ -23,7 +24,7 @@ class Game():
         self.clock = time.Clock()
         self.run = True
 
-        self.bg = scale(load("sprites/grass.png").convert(), (WIN_WIDTH, WIN_HEIGHT))
+        self.bg = GameSprite(self.window, "sprite/grass.png", 0, 0, WIN_WIDTH, WIN_HEIGHT)
         self.cursor_image = scale(load("sprites/cursor.png"), (64, 64))
         self.player = Player(self.window, "sprites/player/player_pistol.png",
                              WIN_WIDTH/2, WIN_HEIGHT/2,
@@ -37,8 +38,8 @@ class Game():
                                  28*2.5, 21*2.5,
                                  self.player)
             self.zombies.add(self.zombie)
-        
-        
+
+
     def draw_cursor(self):
         mouse_x, mouse_y = mouse.get_pos()
         image_width, image_height = self.cursor_image.get_size()

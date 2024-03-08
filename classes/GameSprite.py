@@ -26,6 +26,20 @@ class GameSprite(sprite.Sprite):
         self.y_change_pos_sprite = (pos[1] - self.rect.centery)
         self.angle = math.degrees(math.atan2(self.y_change_pos_sprite, self.x_change_pos_sprite))
         self.image = rotate(self.base_image, -self.angle)
+
+    def move_camera(self, direction, speed):
+        if direction[0] == "-":
+            self.rect.x -= speed
+
+        elif direction[0] == "+":
+            self.rect.x += speed
+
+        if direction[1] == "-":
+            self.rect.y -= speed
+
+        elif direction[1] == "+":
+            self.rect.y += speed
+
     
     def draw(self):
         self.window.blit(self.image, (self.rect.x, self.rect.y))

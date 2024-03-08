@@ -10,17 +10,29 @@ class Player(GameSprite):
         self.bullets = sprite.Group()
         self.bullet_delay = 300
         self.last_shoot = time.get_ticks()
+        self.camera_sprites = []
+
+    def set_camera_sprites(self, sprites):
+        self.camera_sprites = sprites
 
     def move(self):
         key_pressed = key.get_pressed()
         if key_pressed[K_a]:
             self.rect.x -= self.player_speed
+            for sprite in self.camera_sprites:
+                sprite.rect.x += self.player_speed
         elif key_pressed[K_d]:
             self.rect.x += self.player_speed
+            for sprite in self.camera_sprites:
+                sprite.rect.x -= self.player_speed
         if key_pressed[K_w]:
             self.rect.y -= self.player_speed
+            for sprite in self.camera_sprites:
+                sprite.rect.y += self.player_speed
         elif key_pressed[K_s]:
             self.rect.y += self.player_speed
+            for sprite in self.camera_sprites:
+                sprite.rect.y -= self.player_speed
 
     def shoot(self):
         current_time = time.get_ticks()
@@ -35,11 +47,14 @@ class Player(GameSprite):
         self.bullets.update()
 
     def bullet_collide(self, enemys):
-        collides = sprite.groupcollide(enemys, self.bullets, False, True)
-        for collide in collides:
-            collide.health -= 50
-            if collide.health <= 0:
-                collide.kill()
+        for enemy in enemys:
+            for bullet in self.bullets:
+                if enemy.rect.colliderect(bullet.rect):
+                    enemy.health -= 50
+                    self.bullets.remove(bullet)
+                    if enemy.health <= 0:
+                        enemys.remove(enemy)
+
                 
     def update(self):
         self.move()

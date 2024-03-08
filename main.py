@@ -30,14 +30,18 @@ class Game():
                              WIN_WIDTH/2, WIN_HEIGHT/2,
                              28*2.5, 21*2.5)
 
-        self.zombies = sprite.Group()
+        self.zombies = []
+        self.all_sprites = [self.bg, self.player]
         
         for _ in range(10):
             self.zombie = Enemy(self.window, "sprites/zombie/zombie_default.png",
                                  randint(0, WIN_WIDTH), randint(0, WIN_HEIGHT),
                                  28*2.5, 21*2.5,
                                  self.player)
-            self.zombies.add(self.zombie)
+            self.zombies.append(self.zombie)
+            self.all_sprites.append(self.zombie)
+
+        self.player.set_camera_sprites(self.all_sprites)
 
 
     def draw_cursor(self):
@@ -48,7 +52,8 @@ class Game():
     def loop(self):
         self.player.update()
         self.player.bullet_collide(self.zombies)
-        self.zombies.update()
+        for zombie in self.zombies:
+            zombie.update()
 
         self.draw_cursor()
 

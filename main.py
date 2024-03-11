@@ -31,7 +31,7 @@ class Game():
                              28*2.5, 21*2.5)
 
         self.zombies = []
-        self.all_sprites = [self.bg, self.player]
+        self.all_sprites = [self.bg]
         
         for _ in range(10):
             self.zombie = Enemy(self.window, "sprites/zombie/zombie_default.png",
@@ -49,6 +49,19 @@ class Game():
         image_width, image_height = self.cursor_image.get_size()
         self.window.blit(self.cursor_image, (mouse_x-(image_width/2), mouse_y-(image_height/2)))
 
+    def draw_bg(self):
+        self.bg.draw()
+        self.bg.draw(-WIN_WIDTH*2, -WIN_HEIGHT*2)
+        self.bg.draw(WIN_WIDTH*2, -WIN_HEIGHT*2)
+        self.bg.draw(-WIN_WIDTH*2, 0)
+        self.bg.draw(0, -WIN_HEIGHT*2)
+
+        self.bg.draw(WIN_WIDTH*2, WIN_HEIGHT*2)
+        self.bg.draw(-WIN_WIDTH*2, WIN_HEIGHT*2)
+        self.bg.draw(0, -WIN_HEIGHT*2)
+        self.bg.draw(WIN_WIDTH*2, 0)
+        self.bg.draw(0, WIN_HEIGHT*2)
+
     def loop(self):
         self.player.update()
         self.player.bullet_collide(self.zombies)
@@ -59,7 +72,7 @@ class Game():
 
     def start(self):
         while self.run:
-            self.bg.draw()
+            self.draw_bg()
 
             for e in event.get():
                 if e.type == QUIT:

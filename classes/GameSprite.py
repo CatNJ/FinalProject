@@ -41,5 +41,5 @@ class GameSprite(sprite.Sprite):
             self.rect.y += speed
 
     
-    def draw(self):
-        self.window.blit(self.image, (self.rect.x, self.rect.y))
+    def draw(self, x_shift=0, y_shift=0):
+        self.window.blit(self.image, (self.rect.x+x_shift, self.rect.y+y_shift))

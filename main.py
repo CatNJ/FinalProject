@@ -35,7 +35,7 @@ class Game():
         
         for _ in range(10):
             self.zombie = Enemy(self.window, "sprites/zombie/zombie_default.png",
-                                 randint(0, WIN_WIDTH), randint(0, WIN_HEIGHT),
+                                 randint(-WIN_WIDTH-WIN_WIDTH/2, WIN_WIDTH+WIN_WIDTH/2), randint(-WIN_WIDTH-WIN_WIDTH/2, WIN_HEIGHT+WIN_HEIGHT/2),
                                  28*2.5, 21*2.5,
                                  self.player)
             self.zombies.append(self.zombie)

@@ -27,7 +27,7 @@ class Player(GameSprite):
                     sprite.rect.x += self.player_speed
                 for sprite in self.zombies_camera:
                     sprite.rect.x += self.player_speed
-                    
+
         elif key_pressed[K_d]:
             if self.x + self.player_speed < 900:
                 self.x += self.player_speed
@@ -57,9 +57,9 @@ class Player(GameSprite):
         if mouse.get_pressed()[0] and current_time - self.last_shoot > self.bullet_delay:
             mouse_x, mouse_y = mouse.get_pos()
             self.bullets.add(PlayerBullet(self.window, "sprites/bullet.png", 
-                                          self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2),
-                                          10, 10,
-                                          mouse_x, mouse_y,))
+                                            self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2),
+                                            10, 10,
+                                            mouse_x, mouse_y,))
             self.last_shoot = current_time
 
         self.bullets.update()
@@ -71,7 +71,10 @@ class Player(GameSprite):
                     enemy.health -= 50
                     self.bullets.remove(bullet)
                     if enemy.health <= 0:
-                        enemys.remove(enemy)
+                        try:
+                            enemys.remove(enemy)
+                        except ValueError:
+                            pass
 
                 
     def update(self):

@@ -3,9 +3,9 @@ from pygame import *
 from pygame.transform import *
 from pygame.image import load
 from random import randint
-from classes.GameSprite import GameSprite
-from classes.Player import Player
-from classes.Enemy import Enemy
+from data.GameSprite import GameSprite
+from data.Player import Player
+from data.Enemy import Enemy
 
 WIN_WIDTH, WIN_HEIGHT = 900, 900
 FPS = 60

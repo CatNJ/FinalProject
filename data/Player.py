@@ -1,5 +1,5 @@
 from pygame import *
-from classes.GameSprite import GameSprite
+from data.GameSprite import GameSprite
 from random import randint
 import math
 

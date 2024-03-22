@@ -1,6 +1,6 @@
 import math
 import pygame
-from classes.GameSprite import GameSprite
+from data.GameSprite import GameSprite
 
 class Enemy(GameSprite):
     def __init__(self, window, image, x, y, width, height, target):

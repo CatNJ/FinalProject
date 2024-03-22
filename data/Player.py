@@ -14,8 +14,9 @@ class Player(GameSprite):
         self.last_shoot = time.get_ticks()
         self.camera_sprites = []
 
-    def set_camera_sprites(self, sprites):
+    def set_camera_sprites(self, sprites, zombies):
         self.camera_sprites = sprites
+        self.zombies_camera = zombies
 
     def move(self):
         key_pressed = key.get_pressed()
@@ -24,20 +25,31 @@ class Player(GameSprite):
                 self.x -= self.player_speed
                 for sprite in self.camera_sprites:
                     sprite.rect.x += self.player_speed
+                for sprite in self.zombies_camera:
+                    sprite.rect.x += self.player_speed
+                    
         elif key_pressed[K_d]:
             if self.x + self.player_speed < 900:
                 self.x += self.player_speed
                 for sprite in self.camera_sprites:
                     sprite.rect.x -= self.player_speed
+                for sprite in self.zombies_camera:
+                    sprite.rect.x -= self.player_speed
+
         if key_pressed[K_w]:
             if self.y + self.player_speed > -900:
                 self.y -= self.player_speed
                 for sprite in self.camera_sprites:
                     sprite.rect.y += self.player_speed
+                for sprite in self.zombies_camera:
+                    sprite.rect.y += self.player_speed
+
         elif key_pressed[K_s]:
             if self.y + self.player_speed < 900:
                 self.y += self.player_speed
                 for sprite in self.camera_sprites:
+                    sprite.rect.y -= self.player_speed
+                for sprite in self.zombies_camera:
                     sprite.rect.y -= self.player_speed
 
     def shoot(self):

@@ -37,11 +37,11 @@ class Game():
             self.zombie = Enemy(self.window, "sprites/zombie/zombie_default.png",
                                  randint(-WIN_WIDTH-WIN_WIDTH/2, WIN_WIDTH+WIN_WIDTH/2), randint(-WIN_WIDTH-WIN_WIDTH/2, WIN_HEIGHT+WIN_HEIGHT/2),
                                  28*2.5, 21*2.5,
-                                 self.player)
+                                 self.player,
+                                 100, 2)
             self.zombies.append(self.zombie)
-            self.all_sprites.append(self.zombie)
 
-        self.player.set_camera_sprites(self.all_sprites)
+        self.player.set_camera_sprites(self.all_sprites, self.zombies)
 
 
     def draw_cursor(self):

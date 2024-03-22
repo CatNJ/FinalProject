@@ -1,13 +1,15 @@
 import math
+import json
+import random
 import pygame
 from data.GameSprite import GameSprite
 
 class Enemy(GameSprite):
-    def __init__(self, window, image, x, y, width, height, target):
+    def __init__(self, window, image, x, y, width, height, target, health, speed):
         super().__init__(window, image, x, y, width, height)
         self.target = target
-        self.speed = 2
-        self.health = 100
+        self.health = health
+        self.speed = speed
 
     def move(self):
         try:
@@ -25,3 +27,35 @@ class Enemy(GameSprite):
         self.move()
         self.draw()
 
+class Spawner:
+    def __init__(self, window, waves, starting_points, increment_rate, player):
+        self.window = window
+        self.waves = waves
+        self.wave = 1
+        self.points = starting_points
+        self.increment_rate = increment_rate
+        self.player = player
+        self.enemys = []
+        self.WIN_WIDTH, self.WIN_HEIGHT = window.get_size()
+        
+        with open("data/zombies.json", "r", encoding="utf-8") as file:
+            self.zombies_list = json.load(file)
+
+    def start(self):
+        if len(self.enemys) == 0:
+            while self.points > 0:
+                zombie = random.choice(list(self.zombies_list.keys()))
+                price = self.zombies_list[zombie]["price"]
+
+                if self.points >= price:
+                    enemy = Enemy(self.window, "sprites/zombie/" + self.zombies_list[zombie]["skin"],
+                                 random.randint(-self.WIN_WIDTH-self.WIN_WIDTH/2, self.WIN_WIDTH+self.WIN_WIDTH/2),
+                                 random.randint(-self.WIN_WIDTH-self.WIN_WIDTH/2, self.WIN_HEIGHT+self.WIN_HEIGHT/2),
+                                 28*2.5, 21*2.5,
+                                 self.player,
+                                 self.zombies_list[zombie]["health"], self.zombies_list[zombie]["speed"])
+                    self.enemys.append(enemy)
+                    self.points -= price
+
+            self.points = self.increment_rate * self.wave
+            self.wave += 1

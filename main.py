@@ -5,7 +5,7 @@ from pygame.image import load
 from random import randint
 from data.GameSprite import GameSprite
 from data.Player import Player
-from data.Enemy import Enemy
+from data.Enemy import Enemy, Spawner
 
 WIN_WIDTH, WIN_HEIGHT = 900, 900
 FPS = 60
@@ -30,18 +30,11 @@ class Game():
                              WIN_WIDTH/2, WIN_HEIGHT/2,
                              28*2.5, 21*2.5)
 
-        self.zombies = []
         self.all_sprites = [self.bg]
-        
-        for _ in range(10):
-            self.zombie = Enemy(self.window, "sprites/zombie/zombie_default.png",
-                                 randint(-WIN_WIDTH-WIN_WIDTH/2, WIN_WIDTH+WIN_WIDTH/2), randint(-WIN_WIDTH-WIN_WIDTH/2, WIN_HEIGHT+WIN_HEIGHT/2),
-                                 28*2.5, 21*2.5,
-                                 self.player,
-                                 100, 2)
-            self.zombies.append(self.zombie)
+        self.spawner = Spawner(self.window, 10, 10, 5, self.player)
+        self.spawner.start()
 
-        self.player.set_camera_sprites(self.all_sprites, self.zombies)
+        self.player.set_camera_sprites(self.all_sprites, self.spawner.enemys)
 
 
     def draw_cursor(self):
@@ -64,10 +57,12 @@ class Game():
 
     def loop(self):
         self.player.update()
-        self.player.bullet_collide(self.zombies)
-        for zombie in self.zombies:
+        self.player.bullet_collide(self.spawner.enemys)
+        self.spawner.start()
+        for zombie in self.spawner.enemys:
             zombie.update()
 
+        self.player.set_camera_sprites(self.all_sprites, self.spawner.enemys)
         self.draw_cursor()
 
     def start(self):

@@ -12,9 +12,9 @@
         "skin": "zombie_default.png"
     },
     "zombie_heavy": {
-        "price": 3,
+        "price": 5,
         "health": 350,
-        "speed": 1,
+        "speed": 2,
         "skin": "zombie_default.png"
     }
 }

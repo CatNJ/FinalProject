@@ -72,12 +72,11 @@ class Game():
 
     def start(self):
         while self.run:
-            self.draw_bg()
-
             for e in event.get():
                 if e.type == QUIT:
                     self.run = False
 
+            self.draw_bg()
             self.loop()
 
             display.update()

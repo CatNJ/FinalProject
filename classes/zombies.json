@@ -1,0 +1,17 @@
+{
+    "zombie_default": {
+        "health": 100,
+        "speed": 2,
+        "skin": "zombie_default.png"
+    },
+    "zombie_fast": {
+        "health": 50,
+        "speed": 4,
+        "skin": "zombie_default.png"
+    },
+    "zombie_heavy": {
+        "health": 350,
+        "speed": 1,
+        "skin": "zombie_default.png"
+    }
+}

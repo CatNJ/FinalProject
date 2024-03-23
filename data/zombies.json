@@ -3,18 +3,21 @@
         "price": 1,
         "health": 100,
         "speed": 2,
+        "damage": 20,
         "skin": "zombie_default.png"
     },
     "zombie_fast": {
         "price": 2,
         "health": 50,
         "speed": 4,
+        "damage": 25,
         "skin": "zombie_default.png"
     },
     "zombie_heavy": {
         "price": 5,
         "health": 350,
         "speed": 2,
+        "damage": 50,
         "skin": "zombie_default.png"
     }
 }

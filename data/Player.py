@@ -95,6 +95,10 @@ class PlayerBullet(GameSprite):
         self.y_vel = math.sin(self.angle) * self.speed
 
     def update(self):
+        if (self.rect.x > self.window.get_width() or self.rect.x < 0 or
+            self.rect.y > self.window.get_height() or self.rect.y < 0):
+            self.kill()
+
         self.rect.x -= int(self.x_vel)
         self.rect.y -= int(self.y_vel)
         self.draw()

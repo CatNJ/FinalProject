@@ -62,7 +62,6 @@ class Game():
             zombie.update()
             if zombie.collide_player():
                 self.player.health -= zombie.damage
-                print(self.player.health)
                 self.spawner.enemys.remove(zombie)
 
         self.player.set_camera_sprites(self.all_sprites, self.spawner.enemys)

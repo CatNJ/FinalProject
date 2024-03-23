@@ -53,9 +53,10 @@ class Spawner:
                 price = self.zombies_list[zombie]["price"]
 
                 if self.points >= price:
+                    spawn = random.choice([-self.WIN_WIDTH/2, self.WIN_HEIGHT*1.5])
                     enemy = Enemy(self.window, "sprites/zombie/" + self.zombies_list[zombie]["skin"],
-                                 random.randint(-self.WIN_WIDTH-self.WIN_WIDTH/2, self.WIN_WIDTH+self.WIN_WIDTH/2),
-                                 random.randint(-self.WIN_WIDTH-self.WIN_WIDTH/2, self.WIN_HEIGHT+self.WIN_HEIGHT/2),
+                                 random.randint(-self.WIN_WIDTH/2, self.WIN_WIDTH*1.5),
+                                 spawn,
                                  28*2.5, 21*2.5,
                                  self.player,
                                  self.zombies_list[zombie]["health"],

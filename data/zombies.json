@@ -15,7 +15,7 @@
     },
     "zombie_heavy": {
         "price": 5,
-        "health": 350,
+        "health": 250,
         "speed": 2,
         "damage": 50,
         "skin": "zombie_heavy.png"

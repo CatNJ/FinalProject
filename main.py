@@ -59,8 +59,13 @@ class Game():
         self.player.update()
         self.player.bullet_collide(self.spawner.enemys)
         self.spawner.start()
+        
         for zombie in self.spawner.enemys:
             zombie.update()
+            if zombie.collide_player():
+                self.player.health -= zombie.damage
+                print(self.player.health)
+                self.spawner.enemys.remove(zombie)
 
         self.player.set_camera_sprites(self.all_sprites, self.spawner.enemys)
         self.draw_cursor()

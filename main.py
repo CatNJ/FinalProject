@@ -1,11 +1,9 @@
-from random import randint
 from pygame import *
 from pygame.transform import *
 from pygame.image import load
-from random import randint
 from data.GameSprite import GameSprite
 from data.Player import Player
-from data.Enemy import Enemy, Spawner
+from data.Enemy import Spawner
 
 WIN_WIDTH, WIN_HEIGHT = 900, 900
 FPS = 60
@@ -59,7 +57,7 @@ class Game():
         self.player.update()
         self.player.bullet_collide(self.spawner.enemys)
         self.spawner.start()
-        
+
         for zombie in self.spawner.enemys:
             zombie.update()
             if zombie.collide_player():

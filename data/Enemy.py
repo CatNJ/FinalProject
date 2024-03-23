@@ -1,7 +1,6 @@
 import math
 import json
 import random
-import pygame
 from data.GameSprite import GameSprite
 
 class Enemy(GameSprite):

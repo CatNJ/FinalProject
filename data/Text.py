@@ -1,5 +1,4 @@
 from pygame import *
-from data.GameSprite import GameSprite
 
 class Text(sprite.Sprite):
     def __init__(self, window, text, x, y, font_size=22, font_name="Impact", color=(255,255,255)):

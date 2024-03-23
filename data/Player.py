@@ -8,6 +8,7 @@ class Player(GameSprite):
         super().__init__(window, image, x, y, width, height)
         self.x = x
         self.y = y
+        self.health = 100
         self.player_speed = 5
         self.bullets = sprite.Group()
         self.bullet_delay = 300

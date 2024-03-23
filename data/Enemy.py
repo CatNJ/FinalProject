@@ -5,11 +5,12 @@ import pygame
 from data.GameSprite import GameSprite
 
 class Enemy(GameSprite):
-    def __init__(self, window, image, x, y, width, height, target, health, speed):
+    def __init__(self, window, image, x, y, width, height, target, health, speed, damage):
         super().__init__(window, image, x, y, width, height)
         self.target = target
         self.health = health
         self.speed = speed
+        self.damage = damage
 
     def move(self):
         try:
@@ -53,7 +54,9 @@ class Spawner:
                                  random.randint(-self.WIN_WIDTH-self.WIN_WIDTH/2, self.WIN_HEIGHT+self.WIN_HEIGHT/2),
                                  28*2.5, 21*2.5,
                                  self.player,
-                                 self.zombies_list[zombie]["health"], self.zombies_list[zombie]["speed"])
+                                 self.zombies_list[zombie]["health"],
+                                 self.zombies_list[zombie]["speed"],
+                                 self.zombies_list[zombie]["damage"])
                     self.enemys.append(enemy)
                     self.points -= price
 

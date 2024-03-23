@@ -24,6 +24,11 @@ class Enemy(GameSprite):
         except ZeroDivisionError:
             pass
 
+    def collide_player(self):
+        if self.rect.colliderect(self.target.rect):
+            return True
+        return False
+
     def update(self):
         self.move()
         self.draw()

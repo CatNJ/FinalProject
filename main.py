@@ -29,6 +29,14 @@ class Game():
                              WIN_WIDTH/2, WIN_HEIGHT/2,
                              28*2.5, 21*2.5)
         
+        self.text_fps = Text(self.window, "",
+                             10, 10, 32)
+        self.text_health = Text(self.window, "",
+                           10, 42, 32)
+        self.text_wave = Text(self.window, "",
+                              10, 74, 32)
+        self.text_enemies_left = Text(self.window, "",
+                                      10, 106, 32)
         self.text_game_over = Text(self.window, "Game Over!",
                                    WIN_WIDTH/2-len("Game Over!")*(75/4), WIN_HEIGHT/2-75, 75,
                                    color=(255, 0, 0))
@@ -53,6 +61,17 @@ class Game():
         self.bg.draw(0, -WIN_HEIGHT*2)
         self.bg.draw(WIN_WIDTH*2, 0)
         self.bg.draw(0, WIN_HEIGHT*2)
+
+    def draw_ui(self):
+        self.text_fps.set_text(f"FPS: {round(self.clock.get_fps(), 1)}")
+        self.text_health.set_text(f"Health: {self.player.health}")
+        self.text_wave.set_text(f"Wave: {self.spawner.wave}")
+        self.text_enemies_left.set_text(f"Enemies left: {len(self.spawner.enemys)}")
+
+        self.text_fps.draw()
+        self.text_health.draw()
+        self.text_wave.draw()
+        self.text_enemies_left.draw()
 
     def loop(self):
         self.player.update()
@@ -81,6 +100,8 @@ class Game():
 
             else:
                 self.text_game_over.draw()
+
+            self.draw_ui()
 
             display.update()
             self.clock.tick(FPS)

@@ -30,10 +30,6 @@ class Game():
 
         self.all_sprites = [self.bg]
         self.spawner = Spawner(self.window, 10, 10, 5, self.player)
-        self.spawner.start()
-
-        self.player.set_camera_sprites(self.all_sprites, self.spawner.enemys)
-
 
     def draw_cursor(self):
         mouse_x, mouse_y = mouse.get_pos()

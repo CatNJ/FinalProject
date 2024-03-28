@@ -36,7 +36,7 @@ class Spawner:
     def __init__(self, window, waves, starting_points, increment_rate, player):
         self.window = window
         self.waves = waves
-        self.wave = 1
+        self.wave = 0
         self.points = starting_points
         self.increment_rate = increment_rate
         self.player = player
@@ -48,6 +48,7 @@ class Spawner:
 
     def start(self):
         if len(self.enemys) == 0:
+            self.wave += 1
             while self.points > 0:
                 zombie = random.choice(list(self.zombies_list.keys()))
                 price = self.zombies_list[zombie]["price"]
@@ -66,4 +67,3 @@ class Spawner:
                     self.points -= price
 
             self.points = self.increment_rate * self.wave
-            self.wave += 1

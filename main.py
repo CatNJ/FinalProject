@@ -4,6 +4,7 @@ from pygame.image import load
 from data.GameSprite import GameSprite
 from data.Player import Player
 from data.Enemy import Spawner
+from data.Text import Text
 
 WIN_WIDTH, WIN_HEIGHT = 900, 900
 FPS = 60
@@ -27,6 +28,10 @@ class Game():
         self.player = Player(self.window, "sprites/player/player_pistol.png",
                              WIN_WIDTH/2, WIN_HEIGHT/2,
                              28*2.5, 21*2.5)
+        
+        self.text_game_over = Text(self.window, "Game Over!",
+                                   WIN_WIDTH/2-len("Game Over!")*(75/4), WIN_HEIGHT/2-75, 75,
+                                   color=(255, 0, 0))
 
         self.all_sprites = [self.bg]
         self.spawner = Spawner(self.window, 10, 10, 5, self.player)
@@ -70,7 +75,12 @@ class Game():
                     self.run = False
 
             self.draw_bg()
-            self.loop()
+            
+            if self.player.health > 1:
+                self.loop()
+
+            else:
+                self.text_game_over.draw()
 
             display.update()
             self.clock.tick(FPS)

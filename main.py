@@ -17,6 +17,9 @@ class Game():
 
         mouse.set_visible(False)
 
+        mixer.music.load("sounds/theme_music.mp3")
+        mixer.music.play(-1)
+
         self.window = display.set_mode((WIN_WIDTH, WIN_HEIGHT))
         display.set_caption("Zombie Killer")
 

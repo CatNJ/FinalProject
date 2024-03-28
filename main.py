@@ -99,6 +99,7 @@ class Game():
                 self.loop()
 
             else:
+                self.player.health = 0
                 self.text_game_over.draw()
 
             self.draw_ui()

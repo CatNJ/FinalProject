@@ -13,6 +13,8 @@ class Player(GameSprite):
         self.bullets = sprite.Group()
         self.bullet_delay = 300
         self.last_shoot = time.get_ticks()
+        self.shoot_sound = mixer.Sound('sounds/pistol_shoot.wav')
+        self.shoot_sound.set_volume(0.25)
         self.camera_sprites = []
 
     def set_camera_sprites(self, sprites, zombies):
@@ -56,6 +58,7 @@ class Player(GameSprite):
     def shoot(self):
         current_time = time.get_ticks()
         if mouse.get_pressed()[0] and current_time - self.last_shoot > self.bullet_delay:
+            self.shoot_sound.play()
             mouse_x, mouse_y = mouse.get_pos()
             self.bullets.add(PlayerBullet(self.window, "sprites/bullet.png", 
                                             self.rect.x+(self.image.get_width()/2), self.rect.y+(self.image.get_height()/2),
